@@ -5,7 +5,11 @@ DOCKERHOST=$1
 SCRIPT=$2
 GALAXYHOST=$3
 
-docker-machine ssh ${DOCKERHOST} "sudo mkdir -p $PWD; sudo chmod 777 $PWD"
-docker-machine scp -r . ${DOCKERHOST}:$PWD
-docker $(docker-machine config ${DOCKERHOST} ) run --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/${SCRPT}
-docker-machine scp -r ${DOCKERHOST}:$PWD/*.png .
+mkdir -p images
+docker-machine ssh ${DOCKERHOST} "sudo rm -rf $PWD ; sudo mkdir -p $PWD; sudo chmod 777 $PWD"
+for RUBYFILE in $(ls *.rb)
+do
+  docker-machine scp ${RUBYFILE} ${DOCKERHOST}:$PWD
+done
+docker $(docker-machine config ${DOCKERHOST} ) run --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/${SCRIPT} ${GALAXYHOST}
+docker-machine scp -r ${DOCKERHOST}:$PWD/*.png images/
