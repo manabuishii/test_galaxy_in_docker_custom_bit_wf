@@ -16,3 +16,8 @@ git clone https://github.com/manabuishii/test_galaxy_in_docker_custom_bit_wf.git
 cd test_galaxy_in_docker_custom_bit_wf
 docker run --net=host --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/test_galaxy.rb http://localhost:10500
 ```
+# docker-machine
+
+```
+./run-container.sh YOURDOCKERMACHINE TESTSCRIPT YOURGALAXYHOST
+```
