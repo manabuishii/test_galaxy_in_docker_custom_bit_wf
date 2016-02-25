@@ -80,14 +80,13 @@ class GalaxyTest < Test::Unit::TestCase
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
     #
-    p parent.text
     #
     begin
       admin_field=driver.find_element(:id, 'admin')
     rescue
       assert false, "ADMIN required"
     end
-    #
+    # Click left top logo
     element = driver.find_element(:id, 'brand')
     element.click
     count=count+1
@@ -161,12 +160,12 @@ class GalaxyTest < Test::Unit::TestCase
     }
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-    #
+    # select import_to_current_history
     action_on_selected_items=driver.find_element(:id, "action_on_selected_items")
 
     options=action_on_selected_items.find_elements(:tag_name => "option")
 
-    #### Select the option "Volvo"
+    #### Select import_to_current_history
     options.each do |g|
       if g.text == "import_to_current_history"
       g.click
@@ -175,12 +174,160 @@ class GalaxyTest < Test::Unit::TestCase
     end
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-    #
+    # click go
     driver.find_element(:id, "action_on_datasets_button").click
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
     #
+    # Click Data libraries
+    #
+    # Move to parent frame.
+    # At this moment driver look at iframe id 'galaxy-main'
+    driver.switch_to.window driver.window_handle
+    element = driver.find_elements(:xpath, "//a[@href='/library_admin/browse_libraries']")[0]
+    #p driver.find_element(:id, 'left')
+    element.click
+    sleep 4
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Click adapter_primer
+    driver.switch_to.frame('galaxy_main')
+    element = driver.find_element(:id, "grid-table")
+    element = element.find_elements(:xpath, "//a[contains(.,'adapter_primer')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # Select sample 1 , ES_SRR616819_div100_1.fastq
+    element = driver.find_element(:id, "library-grid")
+    #element = element.find_elements(:xpath, "//a[contains(.,'ES_SRR616819_div100_1.fastq')]")[0]
+
+    datasets=["all_sequencing_WTA_adopters.fa"]
+    datasets.each { |dataset|
+      element.find_elements(:xpath, "//a[contains(.,'#{dataset}')]/../../input")[0].click
+    }
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # select import_to_current_history
+    action_on_selected_items=driver.find_element(:id, "action_on_selected_items")
+
+    options=action_on_selected_items.find_elements(:tag_name => "option")
+
+    #### Select import_to_current_history
+    options.each do |g|
+      if g.text == "import_to_current_history"
+        g.click
+        break
+      end
+    end
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # click go
+    driver.find_element(:id, "action_on_datasets_button").click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+
+    # Click left top logo
+    # Move to parent frame.
+    # At this moment driver look at iframe id 'galaxy-main'
+    driver.switch_to.window driver.window_handle
+
+    element = driver.find_element(:id, 'brand')
+    element.click
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Click All workflows
+    element = driver.find_elements(:xpath, "//a[@href='/workflow/list_for_run']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # RNA-seq_01_Single-end(Quantifying in Sailfish) (imported from API)
+    driver.switch_to.frame('galaxy_main')
+    #element = driver.find_element(:id, "grid-table")
+    element = driver.find_elements(:xpath, "//a[contains(.,'RNA-seq_01_Single-end(Quantifying in Sailfish)')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # Step 1 select
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select all_sequencing_WTA_adopters.fa"
+    options.each do |g|
+      if g.text.index("all_sequencing_WTA_adopters.fa") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Step 2 multiselect _1
+    # Input Dataset [Single end reads]
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]")[0]
+    element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
+    element2.click
+    # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
+    # p element.attribute('innerHTML')
+    # element.click
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    multiinput_filter = element.find_elements(:xpath, "..//input[@class='multiinput-filter']")[0]
+    multiinput_filter.click
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # input _1 and enter to select
+    multiinput_filter.send_keys("_1\n")
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # Step 5: Sailfish_Wrapper
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 5: Sailfish_Wrapper')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Select a sailfish index
+    element = driver.find_elements(:xpath, "//label[contains(.,'Select a sailfish index')]/..")[0]
+    # open editable_field
+    element2 = element.find_elements(:xpath, ".//span[@class='editable_field']")[0]
+    element2.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # select
+    element2 = element.find_elements(:xpath, ".//select")[0]
+
+    options=element2.find_elements(:tag_name => "option")
+
+    #### Select mouse cdna_all/Ensembl GRCm38(release-82)
+    options.each do |g|
+      if g.text.index("mouse cdna_all/Ensembl GRCm38(release-82)") != nil
+        g.click
+        break
+      end
+    end
+    #element2.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # Run workflow
+    element = driver.find_elements(:xpath, "//input[@name='run_workflow']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
 
     #
     driver.close
