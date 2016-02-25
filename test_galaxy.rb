@@ -1,6 +1,7 @@
 require 'selenium-webdriver'
 require 'rubygems'
 require 'test/unit'
+require 'time'
 
 $url = ARGV[0]
 
