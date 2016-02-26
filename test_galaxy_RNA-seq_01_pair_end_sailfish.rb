@@ -116,7 +116,7 @@ class GalaxyTest < Test::Unit::TestCase
     history_input=element.find_elements(:xpath, "//div[@class='title']/div[@class='name']/input")[0]
     # input history name
     current_time = Time.now.iso8601.to_s
-    history_name = "history_"+current_time
+    history_name = "Paired-end_Sailfish_"+current_time
     history_input.send_keys(history_name+"\n")
 
     count=count+1
@@ -342,13 +342,13 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-    #
-    # # Run workflow
-    # element = driver.find_elements(:xpath, "//input[@name='run_workflow']")[0]
-    # element.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # Run workflow
+    element = driver.find_elements(:xpath, "//input[@name='run_workflow']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
 
     #
     driver.close
