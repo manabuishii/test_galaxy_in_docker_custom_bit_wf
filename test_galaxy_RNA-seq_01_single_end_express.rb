@@ -304,42 +304,42 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-    # #
-    # # Step 1 select
-    # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
-    # options=element.find_elements(:tag_name => "option")
     #
-    # #### Select all_sequencing_WTA_adopters.fa"
-    # options.each do |g|
-    #   if g.text.index("all_sequencing_WTA_adopters.fa") != nil
-    #     g.click
-    #     break
-    #   end
-    # end
-    # sleep 1
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # # Step 2 multiselect _1
-    # # Input Dataset [Single end reads]
-    # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]")[0]
-    # element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
-    # element2.click
-    # # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
-    # # p element.attribute('innerHTML')
-    # # element.click
-    # sleep 1
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # multiinput_filter = element.find_elements(:xpath, "..//input[@class='multiinput-filter']")[0]
-    # multiinput_filter.click
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # # input _1 and enter to select
-    # multiinput_filter.send_keys("_1\n")
-    # sleep 1
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # #
+    # Step 1 select
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select all_sequencing_WTA_adopters.fa"
+    options.each do |g|
+      if g.text.index("all_sequencing_WTA_adopters.fa") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Step 2 multiselect _1
+    # Input Dataset [Single end reads]
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]")[0]
+    element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
+    element2.click
+    # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
+    # p element.attribute('innerHTML')
+    # element.click
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    multiinput_filter = element.find_elements(:xpath, "..//input[@class='multiinput-filter']")[0]
+    multiinput_filter.click
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # input _1 and enter to select
+    multiinput_filter.send_keys("_1\n")
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
     # # Step 5: Sailfish_Wrapper
     # element = driver.find_elements(:xpath, "//span[contains(.,'Step 5: Sailfish_Wrapper')]")[0]
     # element.click
