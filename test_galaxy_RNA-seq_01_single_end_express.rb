@@ -339,6 +339,20 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 1
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Step 3 Input Dataset [Reference Transcriptome]
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Reference Transcriptome]')]/..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select 3: mm10_refMrna.fa
+    options.each do |g|
+      if g.text.index("mm10_refMrna.fa") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     # # Step 5: Sailfish_Wrapper
     # element = driver.find_elements(:xpath, "//span[contains(.,'Step 5: Sailfish_Wrapper')]")[0]
