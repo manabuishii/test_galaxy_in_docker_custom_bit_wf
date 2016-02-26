@@ -230,23 +230,6 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-
-
-    # Click left top logo
-    # Move to parent frame.
-    # At this moment driver look at iframe id 'galaxy-main'
-    driver.switch_to.window driver.window_handle
-
-    element = driver.find_element(:id, 'brand')
-    element.click
-    count=count+1
-    driver.save_screenshot("/work/galaxy-#{count}.png")
-    # Click All workflows
-    element = driver.find_elements(:xpath, "//a[@href='/workflow/list_for_run']")[0]
-    element.click
-    sleep 2
-    count=count+1
-    driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     # Click Data libraries to install transcriptome_ref_fasta
     #
@@ -293,6 +276,23 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     # click go
     driver.find_element(:id, "action_on_datasets_button").click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+
+    # Click left top logo
+    # Move to parent frame.
+    # At this moment driver look at iframe id 'galaxy-main'
+    driver.switch_to.window driver.window_handle
+
+    element = driver.find_element(:id, 'brand')
+    element.click
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Click All workflows
+    element = driver.find_elements(:xpath, "//a[@href='/workflow/list_for_run']")[0]
+    element.click
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
