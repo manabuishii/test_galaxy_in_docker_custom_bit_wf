@@ -311,37 +311,37 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 1
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-    #
-    # # Step 5: Sailfish_Wrapper
-    # element = driver.find_elements(:xpath, "//span[contains(.,'Step 5: Sailfish_Wrapper')]")[0]
-    # element.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # # Select a sailfish index
-    # element = driver.find_elements(:xpath, "//label[contains(.,'Select a sailfish index')]/..")[0]
-    # # open editable_field
-    # element2 = element.find_elements(:xpath, ".//span[@class='editable_field']")[0]
-    # element2.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # # select
-    # element2 = element.find_elements(:xpath, ".//select")[0]
-    #
-    # options=element2.find_elements(:tag_name => "option")
-    #
-    # #### Select mouse cdna_all/Ensembl GRCm38(release-82)
-    # options.each do |g|
-    #   if g.text.index("mouse cdna_all/Ensembl GRCm38(release-82)") != nil
-    #     g.click
-    #     break
-    #   end
-    # end
-    # #element2.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # Step 7: Sailfish_Wrapper
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 7: Sailfish_Wrapper')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Select a sailfish index
+    element = driver.find_elements(:xpath, "//label[contains(.,'Select a sailfish index')]/..")[0]
+    # open editable_field
+    element2 = element.find_elements(:xpath, ".//span[@class='editable_field']")[0]
+    element2.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # select
+    element2 = element.find_elements(:xpath, ".//select")[0]
+
+    options=element2.find_elements(:tag_name => "option")
+
+    #### Select mouse cdna_all/Ensembl GRCm38(release-82)
+    options.each do |g|
+      if g.text.index("mouse cdna_all/Ensembl GRCm38(release-82)") != nil
+        g.click
+        break
+      end
+    end
+    #element2.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     # # Run workflow
     # element = driver.find_elements(:xpath, "//input[@name='run_workflow']")[0]
