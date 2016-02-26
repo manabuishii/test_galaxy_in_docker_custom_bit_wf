@@ -295,15 +295,15 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
-    #
-    # # RNA-seq_01_Single-end(Quantifying in Sailfish) (imported from API)
-    # driver.switch_to.frame('galaxy_main')
-    # #element = driver.find_element(:id, "grid-table")
-    # element = driver.find_elements(:xpath, "//a[contains(.,'RNA-seq_01_Single-end(Quantifying in Sailfish)')]")[0]
-    # element.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # RNA-seq_01_Single-end(Quantifying in eXpress)
+    driver.switch_to.frame('galaxy_main')
+    #element = driver.find_element(:id, "grid-table")
+    element = driver.find_elements(:xpath, "//a[contains(.,'RNA-seq_01_Single-end(Quantifying in eXpress)')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     # #
     # # Step 1 select
     # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
