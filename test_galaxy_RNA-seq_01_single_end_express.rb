@@ -116,7 +116,7 @@ class GalaxyTest < Test::Unit::TestCase
     history_input=element.find_elements(:xpath, "//div[@class='title']/div[@class='name']/input")[0]
     # input history name
     current_time = Time.now.iso8601.to_s
-    history_name = "history_"+current_time
+    history_name = "Single-end_eXpress_"+current_time
     history_input.send_keys(history_name+"\n")
 
     count=count+1
