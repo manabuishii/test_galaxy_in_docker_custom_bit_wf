@@ -321,7 +321,7 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     # Step 2 multiselect _1
     # Input Dataset [Single end reads]
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]")[0]
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single End reads]')]")[0]
     element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
     element2.click
     # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
