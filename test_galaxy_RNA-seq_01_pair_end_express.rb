@@ -298,29 +298,29 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
 
 
-    # # RNA-seq_01_Paired-end(Quantifying in Sailfish) (imported from API)
-    # driver.switch_to.frame('galaxy_main')
-    # #element = driver.find_element(:id, "grid-table")
-    # element = driver.find_elements(:xpath, "//a[contains(.,'RNA-seq_01_Paired-end(Quantifying in Sailfish)')]")[0]
-    # element.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # #
-    # # Step 1 select
-    # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter ot Primer list]')]/..//select")[0]
-    # options=element.find_elements(:tag_name => "option")
+    # RNA-seq_01_Paired-end(Quantifying in eXpress) (imported from API)
+    driver.switch_to.frame('galaxy_main')
+    #element = driver.find_element(:id, "grid-table")
+    element = driver.find_elements(:xpath, "//a[contains(.,'RNA-seq_01_Paired-end(Quantifying in eXpress)')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     #
-    # #### Select all_sequencing_WTA_adopters.fa"
-    # options.each do |g|
-    #   if g.text.index("all_sequencing_WTA_adopters.fa") != nil
-    #     g.click
-    #     break
-    #   end
-    # end
-    # sleep 1
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Step 1 select
+    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select all_sequencing_WTA_adopters.fa"
+    options.each do |g|
+      if g.text.index("all_sequencing_WTA_adopters.fa") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     # # Step 2 multiselect _1
     # # Input Dataset [Single end reads]
     # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Left-hand of Paired End reads]')]")[0]
