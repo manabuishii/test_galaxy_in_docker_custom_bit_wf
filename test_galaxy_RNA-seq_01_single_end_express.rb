@@ -280,21 +280,21 @@ class GalaxyTest < Test::Unit::TestCase
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
 
-    # # Click left top logo
-    # # Move to parent frame.
-    # # At this moment driver look at iframe id 'galaxy-main'
-    # driver.switch_to.window driver.window_handle
-    #
-    # element = driver.find_element(:id, 'brand')
-    # element.click
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
-    # # Click All workflows
-    # element = driver.find_elements(:xpath, "//a[@href='/workflow/list_for_run']")[0]
-    # element.click
-    # sleep 2
-    # count=count+1
-    # driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Click left top logo
+    # Move to parent frame.
+    # At this moment driver look at iframe id 'galaxy-main'
+    driver.switch_to.window driver.window_handle
+
+    element = driver.find_element(:id, 'brand')
+    element.click
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Click All workflows
+    element = driver.find_elements(:xpath, "//a[@href='/workflow/list_for_run']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     # # RNA-seq_01_Single-end(Quantifying in Sailfish) (imported from API)
     # driver.switch_to.frame('galaxy_main')
