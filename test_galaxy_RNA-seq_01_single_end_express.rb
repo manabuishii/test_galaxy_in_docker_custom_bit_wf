@@ -96,15 +96,28 @@ class GalaxyTest < Test::Unit::TestCase
     element.click
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
+    # wait new history created
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
+    begin
+      wait.until { driver.find_element(:xpath, "//div[@class='search-input']") }
+    rescue
+      assert false, "//div[@class='search-input'] is missing"
+    end
     #
     element = driver.find_element(:id, 'history-options-button-menu')
     create_new=element.find_elements(:xpath, "//a[contains(., 'Create New')]")[0]
     create_new.click
-    sleep 5
+    #sleep 5
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     element = driver.find_element(:id, 'current-history-panel')
+    wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
+    begin
+      wait.until { element.find_element(:xpath, "//div[@class='title']") }
+    rescue
+      assert false, "div[@class='title'] is missing"
+    end
     history_title=element.find_elements(:xpath, "//div[@class='title']")[0]
     history_title.click
     sleep 2
