@@ -13,5 +13,8 @@ do
   docker-machine scp ${RUBYFILE} ${DOCKERHOST}:$PWD
 done
 docker $(docker-machine config ${DOCKERHOST} ) run --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/${SCRIPT} ${GALAXYHOST}
+RET=$?
 # TODO timestamp to file
 docker-machine scp -r ${DOCKERHOST}:$PWD/*.png images/
+echo "RET=[$RET] if RET is not 0, maybe your Galaxy environment do not set data library"
+exit ${RET}
