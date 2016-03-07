@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 if [ $# -ne 3 ]; then
-  echo "USAGE: check_histories.txt GALAXY_HOST APIKEY ID(Galaxy History ID)"
+  echo "USAGE: check_histories.sh GALAXY_HOST APIKEY ID(Galaxy History ID)"
   exit 1
 fi
 # argv
