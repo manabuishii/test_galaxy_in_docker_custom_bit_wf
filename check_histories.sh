@@ -12,7 +12,7 @@ HISTORY_ID=$3
 HISTORIESDETAILFILE=${HISTORY_ID}.txt
 rm $HISTORIESDETAILFILE
 
-docker $(docker-machine config jenkinsdockerslave) run --rm manabuishii/galaxy_scripts:0.1.1 galaxy_history_detail.py ${GALAXY_HOST} ${APIKEY} ${HISTORY_ID} --tsv &> ${HISTORIESDETAILFILE}
+docker $(docker-machine config jenkinsdockerslave) run --rm manabuishii/galaxy_scripts:0.2.0 galaxy_history_detail.py ${GALAXY_HOST} ${APIKEY} ${HISTORY_ID} --tsv &> ${HISTORIESDETAILFILE}
 
 #
 RET=0

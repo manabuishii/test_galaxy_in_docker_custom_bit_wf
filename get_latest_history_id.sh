@@ -10,4 +10,4 @@ APIKEY=$2
 JENKINSJOBURL=$3
 
 #
-docker $(docker-machine config jenkinsdockerslave) run --rm manabuishii/galaxy_scripts:0.1.1 galaxy_histories.py ${GALAXY_HOST} ${APIKEY} | jq -r '.[0].id'
+docker $(docker-machine config jenkinsdockerslave) run --rm manabuishii/galaxy_scripts:0.2.0 galaxy_histories.py ${GALAXY_HOST} ${APIKEY} | jq -r '.[0].id'
