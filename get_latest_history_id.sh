@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
-  echo "USAGE: check_histories.txt GALAXY_HOST APIKEY"
+  echo "USAGE: get_latest_history_id.sh GALAXY_HOST APIKEY"
   exit 1
 fi
 # argv
