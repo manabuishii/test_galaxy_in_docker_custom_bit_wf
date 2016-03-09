@@ -1,9 +1,16 @@
 #!/bin/bash
 #
 
+if [ $# -lt 3 ]; then
+  echo "Usage DOCKERHOST SCRIPT GALAXYHOST [other options pass to test script]"
+  exit 1
+fi
+#
 DOCKERHOST=$1
 SCRIPT=$2
 GALAXYHOST=$3
+# remove 3 params
+shift 3
 
 mkdir -p images
 # TODO change rm -rf to something
@@ -12,7 +19,7 @@ for RUBYFILE in $(ls *.rb)
 do
   docker-machine scp ${RUBYFILE} ${DOCKERHOST}:$PWD
 done
-docker $(docker-machine config ${DOCKERHOST} ) run --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/${SCRIPT} ${GALAXYHOST}
+docker $(docker-machine config ${DOCKERHOST} ) run --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/${SCRIPT} ${GALAXYHOST} "$@"
 RET=$?
 # TODO timestamp to file
 docker-machine scp -r ${DOCKERHOST}:$PWD/*.png images/
