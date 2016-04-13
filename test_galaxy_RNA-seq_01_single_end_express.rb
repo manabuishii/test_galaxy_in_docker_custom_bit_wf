@@ -118,6 +118,9 @@ class GalaxyTest < Test::Unit::TestCase
     rescue
       assert false, "div[@class='title'] is missing"
     end
+    # TODO: wait visible
+    # : Selenium::WebDriver::Error::ElementNotVisibleError: Element is not currently visible and so may not be interacted with
+    sleep 2
     history_title=element.find_elements(:xpath, "//div[@class='title']")[0]
     history_title.click
     sleep 2
@@ -319,7 +322,7 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     # Step 1 select
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 1:')]/../..//select")[0]
     options=element.find_elements(:tag_name => "option")
 
     #### Select all_sequencing_WTA_adopters.fa"
@@ -334,7 +337,7 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     # Step 2 multiselect _1
     # Input Dataset [Single end reads]
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single End reads]')]")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../../div[contains(@class,'toolFormBody')]//label")[0]
     element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
     element2.click
     # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
@@ -353,7 +356,7 @@ class GalaxyTest < Test::Unit::TestCase
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
     # Step 3 Input Dataset [Reference Transcriptome]
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Reference Transcriptome]')]/..//select")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//select")[0]
     options=element.find_elements(:tag_name => "option")
 
     #### Select 3: mm10_refMrna.fa
