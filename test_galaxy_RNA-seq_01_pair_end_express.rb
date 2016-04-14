@@ -118,6 +118,9 @@ class GalaxyTest < Test::Unit::TestCase
     rescue
       assert false, "div[@class='title'] is missing"
     end
+    # TODO: wait visible
+    # : Selenium::WebDriver::Error::ElementNotVisibleError: Element is not currently visible and so may not be interacted with
+    sleep 2
     history_title=element.find_elements(:xpath, "//div[@class='title']")[0]
     history_title.click
     sleep 2
@@ -264,10 +267,10 @@ class GalaxyTest < Test::Unit::TestCase
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
 
-    # Select sample 1 , mm10_refMrna.fa
+    # Select sample 1 , GRCm38_cdna_all.fa
     element = driver.find_element(:id, "library-grid")
 
-    datasets=["mm10_refMrna.fa"]
+    datasets=["GRCm38_cdna_all.fa"]
     datasets.each { |dataset|
       element.find_elements(:xpath, "//a[contains(.,'#{dataset}')]/../../input")[0].click
     }
@@ -321,7 +324,8 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     #
     # Step 1 select
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    #element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 1:')]/../..//select")[0]
     options=element.find_elements(:tag_name => "option")
 
     #### Select all_sequencing_WTA_adopters.fa"
@@ -336,7 +340,8 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     # Step 2 multiselect _1
     # Input Dataset [Single end reads]
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Left-hand of Paired End reads]')]")[0]
+    #element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Left-hand of Paired End reads]')]")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../../div[contains(@class,'toolFormBody')]//label")[0]
     element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
     element2.click
     # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
@@ -356,7 +361,8 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
     # Step 3 multiselect _2
     # Input Dataset [Right-hand mates of Paired End reads]
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Right-hand mates of Paired End reads]')]")[0]
+    #element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Right-hand mates of Paired End reads]')]")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../../div[contains(@class,'toolFormBody')]//label")[0]
     element2 = element.find_elements(:xpath, "./span[contains(@class,'multiinput')]")[0]
     element2.click
     # element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Single end reads]')]/span[contains(@class,'multiinput')]")[0]
@@ -376,12 +382,13 @@ class GalaxyTest < Test::Unit::TestCase
     driver.save_screenshot("/work/galaxy-#{count}.png")
 
     # Step 4: Input dataset
-    element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Reference Transcriptome]')]/..//select")[0]
+    #element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Reference Transcriptome]')]/..//select")[0]
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 4:')]/../..//select")[0]
     options=element.find_elements(:tag_name => "option")
 
-    #### mm10_refMrna.fa
+    #### GRCm38_cdna_all.fa
     options.each do |g|
-      if g.text.index("mm10_refMrna.fa") != nil
+      if g.text.index("GRCm38_cdna_all.fa") != nil
         g.click
         break
       end
@@ -389,7 +396,32 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 1
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Step 6 Bowtie2
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 6:')]")[0]
+    element.click
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//label[contains(.,'Select reference genome')]/..//span[@class='editable_field']")[0]
+    element.click
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
 
+    # select
+    element = driver.find_elements(:xpath, "//label[contains(.,'Select reference genome')]/..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+    #### Select 5: mouse cdna_all/Ensembl GRCm38(release-82)
+    options.each do |g|
+      if g.text == "mouse cdna_all/Ensembl GRCm38(release-82)"
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
     # Run workflow
     element = driver.find_elements(:xpath, "//input[@name='run_workflow']")[0]
     element.click
