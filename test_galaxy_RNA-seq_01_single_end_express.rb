@@ -267,10 +267,10 @@ class GalaxyTest < Test::Unit::TestCase
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
 
-    # Select sample 1 , mm10_refMrna.fa
+    # Select sample 1 , GRCm38_cdna_all.fa this must be same as Step 5 Bowtie2 index
     element = driver.find_element(:id, "library-grid")
 
-    datasets=["mm10_refMrna.fa"]
+    datasets=["GRCm38_cdna_all.fa"]
     datasets.each { |dataset|
       element.find_elements(:xpath, "//a[contains(.,'#{dataset}')]/../../input")[0].click
     }
@@ -359,9 +359,36 @@ class GalaxyTest < Test::Unit::TestCase
     element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//select")[0]
     options=element.find_elements(:tag_name => "option")
 
-    #### Select 3: mm10_refMrna.fa
+    #### Select 3: GRCm38_cdna_all.fa this must be same as Step 5 Bowtie2 index
     options.each do |g|
-      if g.text.index("mm10_refMrna.fa") != nil
+      if g.text.index("GRCm38_cdna_all.fa") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # Step 5 Bowtie2
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 5:')]")[0]
+    element.click
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//label[contains(.,'Select reference genome')]/..//span[@class='editable_field']")[0]
+    element.click
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    # select
+    element = driver.find_elements(:xpath, "//label[contains(.,'Select reference genome')]/..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+    #### Select 5: mouse cdna_all/Ensembl GRCm38(release-82)
+    options.each do |g|
+      if g.text == "mouse cdna_all/Ensembl GRCm38(release-82)"
         g.click
         break
       end
