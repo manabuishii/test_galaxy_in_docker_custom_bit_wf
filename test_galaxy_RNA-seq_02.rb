@@ -5,7 +5,7 @@ require 'time'
 
 $url = ARGV[0]
 $history_id = ARGV[1]
-$history_name = ARGV[2]
+$quantification_tool = ARGV[2]
 
 class GalaxyTest < Test::Unit::TestCase
   def setup
@@ -102,10 +102,6 @@ class GalaxyTest < Test::Unit::TestCase
     element = driver.find_element(:id, "history-column-#{$history_id}")
     switch_button_elements = element.find_elements(:xpath, ".//button[contains(., 'Switch to')]")
     current_history_elements = element.find_elements(:xpath, ".//strong[contains(., 'Current History')]")
-    p "---switch_button_elements"
-    p switch_button_elements
-    p "---current_history_elements"
-    p current_history_elements
     if switch_button_elements != nil and switch_button_elements.length > 0 then
       switch_button = switch_button_elements[0]
       switch_button.click
@@ -133,6 +129,172 @@ class GalaxyTest < Test::Unit::TestCase
     sleep 2
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # RNA-seq_02_Plotting of QC-all,corr,H-clustering and PCA) (imported from API)
+    # Click RNA-seq_02_Plotting of QC-all,corr,H-clustering and PCA) (imported from API)
+    driver.switch_to.frame('galaxy_main')
+    element = driver.find_elements(:xpath, "//a[contains(., 'RNA-seq_02_Plotting of QC-all,corr,H-clustering and PCA)')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Get current history name
+    driver.switch_to.window driver.window_handle
+    element = driver.find_element(:id, 'current-history-panel')
+    history_title=element.find_elements(:xpath, "//div[@class='title']")[0]
+    history_name = history_title.text
+    # Click Step 1
+    driver.switch_to.frame('galaxy_main')
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 1:')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//label[contains(.,'Supply your Current history name from top of history pain ')]/..//span[@class='editable_field']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # input history input name
+    element = driver.find_elements(:xpath, "//label[contains(.,'Supply your Current history name from top of history pain ')]/..//span[@class='editable']/input[@type='text']")[0]
+    #sleep 5
+
+    element.clear
+    element.send_keys(history_name)
+    #p element.attribute('value')
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # Click Step 2
+    #driver.switch_to.frame('galaxy_main')
+    element_step2 = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]")[0]
+    element_step2.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../..//label[contains(.,'Supply your Current history name from top of history pain')]/..//span[@class='editable_field']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # # input history input name
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../..//label[contains(.,'Supply your Current history name from top of history pain ')]/..//span[@class='editable']/input[@type='text']")[0]
+    element.clear
+    element.send_keys(history_name)
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # Select quatintification tool
+    # Step 3 select
+    #element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../..//label[contains(.,'Chouse of used quantification tool')]/..//span[@class='editable_field']")[0]
+    element.click
+
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    #
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select use Sailfish
+    options.each do |g|
+      if g.text.index("use eXpress") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # Step3
+    # Click Step 3
+    #driver.switch_to.frame('galaxy_main')
+    element_step3 = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]")[0]
+    element_step3.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//label[contains(.,'Supply your Current history name from top of history pain')]/..//span[@class='editable_field']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    # # input history input name
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//label[contains(.,'Supply your Current history name from top of history pain ')]/..//span[@class='editable']/input[@type='text']")[0]
+    element.clear
+    element.send_keys(history_name)
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # Select quatintification tool
+    # Step 3 select
+    #element = driver.find_elements(:xpath, "//label[contains(.,'Input Dataset [Adapter or Primer list]')]/..//select")[0]
+    ### open select by click editable_field
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//label[contains(.,'Chouse of used quantification tool')]/..//span[@class='editable_field']")[0]
+    element.click
+
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
+    #
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select use Sailfish
+    options.each do |g|
+      if g.text.index("use eXpress") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    #
+    # Step5
+    # Click Step 5
+    #driver.switch_to.frame('galaxy_main')
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 5:')]")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 5:')]/../..//label[contains(.,'Chouse of used quantification tool')]/..//span[@class='editable_field']")[0]
+    element.click
+    #
+    element = driver.find_elements(:xpath, "//span[contains(.,'Step 5:')]/../..//select")[0]
+    options=element.find_elements(:tag_name => "option")
+
+    #### Select use Sailfish
+    options.each do |g|
+      if g.text.index("use eXpress") != nil
+        g.click
+        break
+      end
+    end
+    sleep 1
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+    #
+    # Run workflow
+    element = driver.find_elements(:xpath, "//input[@name='run_workflow']")[0]
+    element.click
+    sleep 2
+    count=count+1
+    driver.save_screenshot("/work/galaxy-#{count}.png")
+
     #
     driver.close
   end
