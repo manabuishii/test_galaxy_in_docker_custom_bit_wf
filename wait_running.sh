@@ -13,6 +13,7 @@ HISTORY_ID=$3
 #
 while true
 do
+  date
   echo "Get ${HISTORY_ID} status"
   STATES=$(docker $(docker-machine config jenkinsdockerslave) run --rm manabuishii/galaxy_scripts:0.2.0 galaxy_history_detail.py ${GALAXY_HOST} ${APIKEY} ${HISTORY_ID} --tsv | tail -n +2 |  cut --delimiter=, -f4 | sort | uniq)
   ERRORFLAG=0
