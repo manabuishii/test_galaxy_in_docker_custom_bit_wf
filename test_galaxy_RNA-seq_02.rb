@@ -99,6 +99,14 @@ class GalaxyTest < Test::Unit::TestCase
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
     #
+    wait = Selenium::WebDriver::Wait.new(:timeout => 30) # seconds
+    begin
+      wait.until { driver.find_element(:id, "history-column-#{$history_id}") }
+    rescue
+      assert false, "history-column-#{$history_id} is missing"
+    end
+
+    # wait for display all histories
     element = driver.find_element(:id, "history-column-#{$history_id}")
     switch_button_elements = element.find_elements(:xpath, ".//button[contains(., 'Switch to')]")
     current_history_elements = element.find_elements(:xpath, ".//strong[contains(., 'Current History')]")
@@ -200,15 +208,8 @@ class GalaxyTest < Test::Unit::TestCase
 
     #
     element = driver.find_elements(:xpath, "//span[contains(.,'Step 2:')]/../..//select")[0]
-    options=element.find_elements(:tag_name => "option")
-
-    #### Select use Sailfish
-    options.each do |g|
-      if g.text.index("use eXpress") != nil
-        g.click
-        break
-      end
-    end
+    select_list = Selenium::WebDriver::Support::Select.new(element)
+    select_list.select_by(:value, $quantification_tool)
     sleep 1
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
@@ -248,15 +249,8 @@ class GalaxyTest < Test::Unit::TestCase
 
     #
     element = driver.find_elements(:xpath, "//span[contains(.,'Step 3:')]/../..//select")[0]
-    options=element.find_elements(:tag_name => "option")
-
-    #### Select use Sailfish
-    options.each do |g|
-      if g.text.index("use eXpress") != nil
-        g.click
-        break
-      end
-    end
+    select_list = Selenium::WebDriver::Support::Select.new(element)
+    select_list.select_by(:value, $quantification_tool)
     sleep 1
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
@@ -275,15 +269,8 @@ class GalaxyTest < Test::Unit::TestCase
     element.click
     #
     element = driver.find_elements(:xpath, "//span[contains(.,'Step 5:')]/../..//select")[0]
-    options=element.find_elements(:tag_name => "option")
-
-    #### Select use Sailfish
-    options.each do |g|
-      if g.text.index("use eXpress") != nil
-        g.click
-        break
-      end
-    end
+    select_list = Selenium::WebDriver::Support::Select.new(element)
+    select_list.select_by(:value, $quantification_tool)
     sleep 1
     count=count+1
     driver.save_screenshot("/work/galaxy-#{count}.png")
