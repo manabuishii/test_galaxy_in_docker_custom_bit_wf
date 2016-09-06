@@ -37,7 +37,7 @@ echo "RET=[${RET}] Check result files has some lines except OK"
 
 # IGNORE: single-end only because paried end is not supported.
 # IGNORE: grep -v "Sailfish_v0.9.*quant_bias_corrected" because sailfish v0.9 is
-FILESIZEZERO=`cat ${HISTORIESDETAILFILE} | grep -v "single-end only" | grep -v grep -v "Sailfish_v0.9.*quant_bias_corrected" | cut -d ',' -f 5 | grep -v file_size| grep ^0$ | wc -l`
+FILESIZEZERO=`cat ${HISTORIESDETAILFILE} | grep -v "single-end only" | grep -v "Sailfish_v0.9.*quant_bias_corrected" | cut -d ',' -f 5 | grep -v file_size| grep ^0$ | wc -l`
 if [ ${FILESIZEZERO} -ne 0 ]; then
   RET=`expr $RET + 1`
 fi
