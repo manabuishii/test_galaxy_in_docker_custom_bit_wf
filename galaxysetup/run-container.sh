@@ -29,6 +29,19 @@ if [ "x$DOCKERIMAGE" == "x" ]
     then
         DOCKERIMAGE=myoshimura080822/galaxy_in_docker_bitwf:160607
 fi
+
+if [ "x$DATADIR" == "x" ]
+    then
+        echo ""
+        exit 1
+fi
+
+if [ "x$EXPORTDIR" == "x" ]
+    then
+        echo ""
+        exit 1
+fi
+
 echo "Using Docker image [${DOCKERIMAGE}]"
 echo "Exec user UID [${EXEC_UID}]"
 echo "Exec username [${EXEC_USERNAME}]"
