@@ -35,6 +35,16 @@ echo "Exec username [${EXEC_USERNAME}]"
 echo "DEFAULT GALAXY USERNAME [${EXEC_GALAXY_USER}]"
 echo "Data directory [${DATADIR}]"
 
+for ARG in "$@"
+do
+  if [ "${ARG}" == "--dry-run" ]
+  then
+    echo "DRYRUN"
+    exit
+  fi
+done
+exit
+
 docker run --privileged=true --net=host --rm \
  -e GALAXY_CONFIG_FILE_PATH=$PWD/export/files \
  -e GALAXY_CONFIG_JOB_WORKING_DIRECTORY=$PWD/export/job_working_directory \
