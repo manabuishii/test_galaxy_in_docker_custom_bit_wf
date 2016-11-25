@@ -52,7 +52,7 @@ docker run --privileged=true --net=host --rm \
  -e "NONUSE=nodejs,reports,proftpd,condor" \
  -e GALAXY_UID=${EXEC_UID} \
  -v $PWD:$PWD \
- -v $PWD/export:/export \
+ -v ${EXPORTDIR}:/export \
  -v ${DATADIR}:/data \
  -v $PWD/setup_inside_container.sh:/galaxy-central/setup_inside_container.sh \
  -ti --name=${CONTAINER_NAME}  \
