@@ -20,7 +20,7 @@ fi
 #fi
 if [ "x$CONTAINER_NAME" == "x" ]
     then
-        CONTAINER_NAME='galaxy'
+        CONTAINER_NAME='galaxytestcontainer'
 fi
 
 
