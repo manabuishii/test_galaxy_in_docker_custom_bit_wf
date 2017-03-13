@@ -27,3 +27,11 @@ docker run --net=host --rm -v $PWD:/work ebeltran/webdriver-ruby ruby /work/test
 When you delete histories from GUI and not switch to some existing history,
 Galaxy create new history and test code create one more history.
 So there is empty ***Unnamed history***.
+
+# Data setup information
+
+* transcriptome_ref_fasta -> fasta
+
+* quartz_div100_rename -> fastqsanger
+
+* adapter_primer -> fasta
