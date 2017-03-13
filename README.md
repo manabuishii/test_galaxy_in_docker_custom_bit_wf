@@ -35,3 +35,8 @@ So there is empty ***Unnamed history***.
 * quartz_div100_rename -> fastqsanger
 
 * adapter_primer -> fasta
+
+# About workflow and memory settings
+
+* sailfish 0.9 workflow maybe needs 8GB or higher (10GB is ok)
+* hisat2 tophat2 requires 32GB or higher
